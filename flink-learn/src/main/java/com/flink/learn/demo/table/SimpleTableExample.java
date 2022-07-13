@@ -26,14 +26,20 @@ public class SimpleTableExample {
 
         Table adLogTable = tableEnv.fromDataStream(adLogStream);
 
-        Table resultTable1 = tableEnv.sqlQuery("select * from " + adLogTable);
+        /*Table resultTable1 = tableEnv.sqlQuery("select * from " + adLogTable);
 
         Table resultTable2 = adLogTable
                 .select($("userId"), $("deviceModel"))
                 .where($("deviceModel").isEqual("SM-A5160"));
 
         tableEnv.toDataStream(resultTable1).print("result1");
-        tableEnv.toDataStream(resultTable2).print("result2");
+        tableEnv.toDataStream(resultTable2).print("result2");*/
+
+        tableEnv.createTemporaryView("adLog", adLogTable);
+        Table resultTable = tableEnv.sqlQuery("select userId, msgType, count(msgType) from adLog group by userId,msgType");
+
+        //group by有更新，需要使用toChangelogStream更新日志表
+        tableEnv.toChangelogStream(resultTable).print();
 
         env.execute();
     }
