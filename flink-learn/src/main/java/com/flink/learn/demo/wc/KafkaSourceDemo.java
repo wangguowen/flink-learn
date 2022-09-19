@@ -11,7 +11,7 @@ import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 
 /**
- * 基于KafkaSource连接kafka(Flink版本 1.14+)
+ * 基于KafkaSource连接kafka（新版本）
  */
 public class KafkaSourceDemo {
 

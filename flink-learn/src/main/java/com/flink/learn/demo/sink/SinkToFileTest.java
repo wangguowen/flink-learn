@@ -16,11 +16,12 @@ public class SinkToFileTest {
         DataStreamSource<String> dataStreamSource = env.fromElements("hadoop", "kafka", "spark", "flink", "es", "mysql");
 
         StreamingFileSink<String> streamingFileSink = StreamingFileSink.<String>forRowFormat(new Path("E:\\test_data\\SinkToFileTest.txt"),
-                new SimpleStringEncoder<>("UTF-8"))
+                        new SimpleStringEncoder<>("UTF-8"))  //指定文件编码
                 .withRollingPolicy(
                         DefaultRollingPolicy.builder()  // 设置滚动策略
                                 .withInactivityInterval(5000) // 不活动的间隔时间
                                 .withRolloverInterval(10000)  // 每隔10s生成1个文件
+                                //.withMaxPartSize(1024L) //当文件大小达到指定值
                                 .build()
                 )
                 .build();

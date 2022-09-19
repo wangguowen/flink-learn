@@ -7,7 +7,7 @@ import org.apache.flink.streaming.connectors.kafka.FlinkKafkaConsumer;
 import java.util.Properties;
 
 /**
- * 基于FlinkKafkaConsumer读取kafka
+ * 基于FlinkKafkaConsumer读取kafka（低版本）
  */
 public class KafkaSourceDemo2 {
 
